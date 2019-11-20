@@ -1,4 +1,9 @@
-const app = require('http').createServer();
+const fs = require('fs');
+const app = require('https').createServer({
+  cert: fs.readFileSync('./../../../certs/bikash-phukan.codes.pem'),
+  key: fs.readFileSync('./../../../certs/bikash-phukan.codes.key'),
+  ca: fs.readFileSync('./../../../certs/bikash-phukan.codes.ca.pem')
+});
 const io = require('socket.io')(app);
 const config = require('./config');
 const mediasoup = require('mediasoup');

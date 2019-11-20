@@ -15,9 +15,9 @@ module.exports = {
       'rbe',
       'rtx'
     ],
-    rtcIPv4: true,
+    rtcIPv4: '10.130.50.227',
     rtcIPv6: true,
-    rtcAnnouncedIPv4: null,
+    rtcAnnouncedIPv4: '165.22.107.186',
     rtcAnnouncedIPv6: null,
     rtcMinPort: 40000,
     rtcMaxPort: 49999,

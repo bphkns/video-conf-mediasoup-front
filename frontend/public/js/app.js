@@ -6,7 +6,7 @@ if (!roomId || !peerName) {
   throw new Error('roomId and peerName weren\'t set in url params');
 }
 
-const socket = io('http://localhost:8080', { query: { roomId, peerName } });
+const socket = io('https://bikash-phukan.codes:8080', { query: { roomId, peerName } });
 
 // Create a local Room instance associated to the remote Room.
 const room = new mediasoupClient.Room();
@@ -48,6 +48,14 @@ room.join(peerName)
       document.getElementById('container').appendChild(video);
       video.play();
     }*/
+
+    const localStream = new MediaStream([videoTrack, audioTrack]);
+    const video = document.createElement('video');
+    video.setAttribute('style', 'max-width: 400px;');
+    video.srcObject = localStream;
+    document.getElementById('container').appendChild(video);
+    video.muted = true;
+    video.play();
 
     // Create Producers for audio and video.
     const audioProducer = room.createProducer(audioTrack);
@@ -136,12 +144,14 @@ function handleConsumer(consumer) {
         video.setAttribute('playsinline', '');
         video.srcObject = stream;
         document.getElementById('container').appendChild(video);
+        video.muted = true;
         video.play();
       }
       if (consumer.kind === 'audio') {
         const audio = document.createElement('audio');
         audio.srcObject = stream;
         document.getElementById('container').appendChild(audio);
+        audio.muted = true;
         audio.play();
       }
     });
